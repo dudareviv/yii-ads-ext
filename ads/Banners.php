@@ -163,6 +163,9 @@ class Banners extends \CWidget
         return \CHtml::link($this->render('/' . $this->name . '/html', [], true), $this->config['href'], ['target' => '_blank', 'id' => "banners-{$this->name}-" . $this->config['views']['remains']]);
     }
 
+    /**
+     * Сохраняем текущую конфигурацию в файл в папке баннера
+     */
     public function save()
     {
         $fh = fopen($this->getViewsPath() . DIRECTORY_SEPARATOR . $this->name . DIRECTORY_SEPARATOR . 'config.php', 'w');
@@ -170,6 +173,13 @@ class Banners extends \CWidget
         fclose($fh);
     }
 
+    /**
+     * Возвращает результат рендера баннеров или null
+     *
+     * @param $name
+     * @param null $count
+     * @return null|string
+     */
     public static function get($name, $count = null)
     {
         $banner = new self($name);
